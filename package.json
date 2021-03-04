@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nirbhay12345/water_sensor/issues"
   },
-  "homepage": "https://github.com/nirbhay12345/water_sensor#readme"
+  "homepage": "https://github.com/nirbhay12345/water_sensor#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
