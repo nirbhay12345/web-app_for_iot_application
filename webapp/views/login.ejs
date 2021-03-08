@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="web-app_for_iot_application/webapp/public/stylesheets/last.css">
-  <script type="text/javascript">
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/last.css">
+  <!-- <script type="text/javascript">
     function pageRedirect() {
-      window.location.href = "info.ejs";}
+      window.location.href = "/register";}
       function pageRedirect1() {
-      window.location.href = "info.ejs";}
-  </script>
+      window.location.href = "/login";}
+  </script> -->
    
 </head>
 <body>
@@ -40,8 +40,8 @@
         <input type="text" placeholder="Name"/>
         <input type="password" placeholder="Password"/>
        
-        <button type="button" class="control-button in" onclick="pageRedirect1()">Sign In</button>
-
+        <button type="button" type="submit" class="control-button in" >Sign In</button>
+        <!-- onclick="pageRedirect1()" -->
       </form>
     </div>
     <div class="sign-up" id="sign-up-info">
@@ -54,7 +54,8 @@
       <form id="sign-up-form" action="/register">
         <input type="text" placeholder="Name"/>
         <input type="password" placeholder="Password"/>
-        <button type="button" class="control-button up" onclick="pageRedirect()">Sign Up</button>
+        <button type="button" type="submit"  class="control-button up" >Sign Up</button>
+        <!-- onclick="pageRedirect()" -->
       </form>
     </div>
   </div>
