@@ -8,6 +8,8 @@ const expreSession = require('express-session');
 var User = require('./models/user');
 const { MONGOURI } = require('./keys');
 
+// routes required
+var indexRoutes = require('./routes/index')
 
 // passport config
 app.use(expreSession({
@@ -40,59 +42,7 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-// user page
-app.get('/info', IsLoggedIn, (req, res) => {
-    res.render('info');
-});
-
-// AUTH ROUTE
-
-// Register or sign up route
-app.get('/register', (req, res) => {
-    res.render('register');
-  });
-  
-  // register post route
-  app.post('/register', (req, res) => {
-    req.body.username;
-    req.body.password;
-    User.register(new User({username: req.body.username}), req.body.password, (err, user) => {
-      if (err) {
-        console.log(err);
-        return res.render('register');
-      }
-      passport.authenticate("local")(req, res , () => {
-        res.redirect('/info');
-      });
-    });
-  });
-  
-  // login Route
-  app.get('/login', (req, res) => {
-    res.render('login');
-  });
-  
-  // login post route
-  app.post('/login', passport.authenticate('local', {
-    successRedirect: "/info",
-    failureRedirect: "/login"
-  }),(req, res) => {
-  });
-  
-  // logout Route
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
-  
-  // middleware
-function IsLoggedIn(req, res, next){
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
-
+app.use('/', indexRoutes);
 
 
 app.listen(3000, (req, res) => {
