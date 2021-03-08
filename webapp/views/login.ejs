@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../public/stylesheets/last.css">
+    <title>iot_parking</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/last.css">
   <!-- <script type="text/javascript">
     function pageRedirect() {
       window.location.href = "/register";}
@@ -20,27 +20,27 @@
     <div class="sign-in" id="sign-in">
       <h1>Welcome Back!</h1>
       <p>To keep connected with us please login with your personal info</p>
-      <button class="switch-button" id="slide-right-button">Sign In</button>
+      <button class="switch-button" id="slide-right-button">LogIn</button>
     </div>
     <div class="sign-up" id="sign-up">
       <h1>Hello, Friend!</h1>
       <p>Enter your personal details and start a journey with us</p>
-      <button class="switch-button" id="slide-left-button">Sign Up</button>
+      <button class="switch-button" id="slide-left-button">Register</button>
     </div>
   </div>
   <div class="form">
     <div class="sign-in" id="sign-in-info">
-      <h1>Sign In</h1>
+      <h1>LogIn</h1>
       <div class="social-media-buttons">
         
         
         
       </div>
-      <form id="sign-in-form" action="/login">      
-        <input type="text" placeholder="Name"/>
-        <input type="password" placeholder="Password"/>
+      <form id="sign-in-form" action="/login" method="POST">      
+        <input type="text" placeholder="Name" name="username"/>
+        <input type="password" placeholder="Password" name="password"/>
        
-        <button type="button" type="submit" class="control-button in" >Sign In</button>
+        <button class="control-button in" >LogIn</button>
         <!-- onclick="pageRedirect1()" -->
       </form>
     </div>
@@ -51,10 +51,10 @@
         
         
       </div>
-      <form id="sign-up-form" action="/register">
-        <input type="text" placeholder="Name"/>
-        <input type="password" placeholder="Password"/>
-        <button type="button" type="submit"  class="control-button up" >Sign Up</button>
+      <form id="sign-up-form" action="/register" method="POST">
+        <input type="text" placeholder="Name" name="username"/>
+        <input type="password" placeholder="Password" name="password"/>
+        <button class="control-button up" >Register</button>
         <!-- onclick="pageRedirect()" -->
       </form>
     </div>
@@ -132,7 +132,7 @@ openSignInButton.addEventListener("click", openSignIn, false);
 
 </script>
 <div class="div">
-<img src="https://res.cloudinary.com/softcom/image/upload/v1559750356/CLP/test-car.png" class="car">
+<img src="images/test-car.png" class="car">
 <div class="wheel1">
   <span>.</span>
   </div>

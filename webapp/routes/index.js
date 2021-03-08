@@ -11,9 +11,9 @@ router.get('/info', IsLoggedIn, (req, res) => {
 // AUTH ROUTES
 
 // Register or sign up route
-router.get('/register', (req, res) => {
-    res.render('register');
-});
+// router.get('/register', (req, res) => {
+//     res.render('login');
+// });
   
 // register post route
 router.post('/register', (req, res) => {
@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
     User.register(new User({username: req.body.username}), req.body.password, (err, user) => {
         if (err) {
         console.log(err);
-        return res.render('register');
+        return res.render('login');
         }
         passport.authenticate("local")(req, res , () => {
         res.redirect('/info');

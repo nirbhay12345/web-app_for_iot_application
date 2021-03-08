@@ -9,6 +9,7 @@ const { MONGOURI } = require('./keys');
 
 // routes required
 var indexRoutes = require('./routes/index')
+var slotRoutes = require('./routes/slots')
 
 // passport config
 app.use(expreSession({
@@ -31,6 +32,7 @@ mongoose.connect(MONGOURI, {
 
 
 // app config
+app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({extended:true}));
@@ -42,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/', indexRoutes);
-
+app.use('/slots', slotRoutes);
 
 app.listen(3000, (req, res) => {
     console.log('Server is running');
