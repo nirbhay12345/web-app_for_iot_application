@@ -1,3 +1,3 @@
-# WATER QUALITY MONITORING IOT WEB APP
-    this is a monitoring system for water sensor data
-    build on nodejs
+# SMART PARKING IOT APPLCATION
+    this is a monitoring system for ENABLING THE SMART PARKING FOR GENERAL USE
+    build on nodejs AND esp8266
