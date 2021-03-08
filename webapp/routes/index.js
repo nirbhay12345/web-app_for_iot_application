@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const localStrategy = require('passport-local');
-const passportLocalMongoose = require('passport-local-mongoose');
-const expreSession = require('express-session');
 var User = require('../models/user');
 
 // user page

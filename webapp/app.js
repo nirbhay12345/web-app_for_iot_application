@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const localStrategy = require('passport-local');
-const passportLocalMongoose = require('passport-local-mongoose');
 const expreSession = require('express-session');
 var User = require('./models/user');
 const { MONGOURI } = require('./keys');
