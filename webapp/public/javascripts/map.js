@@ -2,6 +2,11 @@ mapboxgl.accessToken = mapToken;
 number = 1;
 Style = 'mapbox://styles/mapbox/streets-v11';
 
+var Popup = new mapboxgl.Popup({offset:25})
+                .setHTML(
+                    `<h3>${location_name}<h3><a href="/slots"><button>BOOK</button></a>`
+                )
+
 $('#button-sat').on("click", () => {
         if(number==1){
             number=0;
@@ -14,11 +19,12 @@ $('#button-sat').on("click", () => {
     var map = new mapboxgl.Map({
         container: 'map',
         style: Style, 
-        center: locate,
+        center: locate.coordinates,
         zoom: 13 
     });
     var marker = new mapboxgl.Marker()
-        .setLngLat(locate)
+        .setLngLat(locate.coordinates)
+        .setPopup(Popup)
         .addTo(map);
 });
 
@@ -26,12 +32,13 @@ $('#button-sat').on("click", () => {
 var map = new mapboxgl.Map({
     container: 'map', 
     style: Style, 
-    center: locate, 
+    center: locate.coordinates, 
     zoom: 13 
 });
 
 var marker = new mapboxgl.Marker()
-  .setLngLat(locate)
+  .setLngLat(locate.coordinates)
+  .setPopup(Popup)
   .addTo(map);
 
 

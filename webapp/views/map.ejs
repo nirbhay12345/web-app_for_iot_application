@@ -20,7 +20,8 @@
     <!-- <%= location.coordinates %> -->
     <script>
         const mapToken = '<%= maptoken %>';
-        const locate = <%- JSON.stringify(location.coordinates) %>;
+        const locate = <%- JSON.stringify(location) %>;
+        const location_name = '<%= name %>';
     </script>
     <script src="/javascripts/map.js"></script>
 
