@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const {MAPTOKEN}  = require('../keys');
-const parkingAreas = require('../models/parkingAreas');
+const ParkSlots = require('../models/parkingAreas');
+const Slots = require('../models/slots');
 const geocoder = mbxGeocoding({accessToken: MAPTOKEN});
 
 // search route
@@ -10,9 +11,54 @@ router.get('/search', IsLoggedIn, (req,res) => {
     res.render('search');
 });
 
-// create route
+// add route
 router.get('/create', IsLoggedIn, (req,res) => {
-  
+  res.render('create');
+});
+
+// create location route
+router.post('/create', IsLoggedIn, async (req,res) => {
+  const locationName = req.body.locationName;
+  const numberSlots = req.body.numslots;
+  const slotArray = [];
+  const slots = [];
+  for(var i = 1; i<=numberSlots; i++){
+    slotArray[i] = i;
+  }
+  for(var j = 1; j<=numberSlots; j++){
+    slots[j] = {slotId:j}
+  }
+  const newslots = {locationName, slots};
+    // forwardgeocoding client
+    const geoData = await geocoder.forwardGeocode({
+      query: locationName,
+      limit: 1
+    }).send()
+  //   location data
+    const locationCoordinates = geoData.body.features[0].geometry;
+    const newParkingArea = {name: locationName, location: locationCoordinates};
+    // await Slots.save();
+    ParkSlots.create(newParkingArea, (err, obj) => {
+      if(err){
+        console.log(err);
+      }else{
+        console.log(obj);
+        Slots.create(newslots, (err, slotss) => {
+          if(err){
+            console.log(err);
+          }else{
+            console.log(slotss);
+            slotss.name = locationName;
+            slotss.slots = slots;
+            slotss.save()
+            obj.slots.push(slotss);
+            obj.save();
+            console.log(obj);
+            res.redirect('/location/create');
+          }
+        });
+      }
+    });
 });
 
 
@@ -26,9 +72,10 @@ router.post('/view', IsLoggedIn, async (req,res) => {
       }).send()
     //   location data
       const location = geoData.body.features[0].geometry;
+      console.log(location);
     //   todo -> mongoose query to search all the parking areas within that location
     // parking list areas -> only admin
-      res.render('map', {location: location, maptoken:MAPTOKEN});
+      res.render('map', {location: location, maptoken:MAPTOKEN, name:req.body.location});
 });
 
 // router.get('/map', (req,res) => {
