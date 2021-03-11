@@ -10,6 +10,7 @@ const { MONGOURI } = require('./keys');
 // routes required
 var indexRoutes = require('./routes/index')
 var slotRoutes = require('./routes/slots')
+var locationRoutes = require('./routes/location')
 
 // passport config
 app.use(expreSession({
@@ -45,6 +46,7 @@ app.get('/', (req, res) => {
 
 app.use('/', indexRoutes);
 app.use('/slots', slotRoutes);
+app.use('/location', locationRoutes);
 
 app.listen(3000, (req, res) => {
     console.log('Server is running');

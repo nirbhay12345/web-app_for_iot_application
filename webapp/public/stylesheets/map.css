@@ -1,0 +1,31 @@
+.map {
+    height: 100vh;
+    /* background-color: green; */
+    z-index: 1;
+}
+
+body {
+    background-color: black;
+}
+
+#button-back {
+    position: fixed;
+    /* float: left; */
+    margin-top: 20px;
+    margin-left: 20px;
+    z-index: 2;
+    opacity: .7;
+}
+
+#button-sat {
+    position: fixed;
+    /* float: left; */
+    margin-top: 20px;
+    margin-left: 120px;
+    z-index: 2;
+    opacity: .7;
+}
+
+a {
+    text-decoration: none;
+}
