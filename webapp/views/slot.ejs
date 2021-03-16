@@ -11,6 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.6.2/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/style.css">    
 
+
+
 </head>
 <body>
 
@@ -52,18 +54,18 @@
                     <div class="banner" style="background-color: black"></div>
                     <div class="flex-rectangle"></div><div class="flex-rectangle"></div>
                     <div class="carousel-caption">
-                        
                         <h3 class="animated bounceInLeft" style="animation-delay: 2s"><div class="flex-rectangle"></div><br>
                         <div class="flex-rectangle"></div><br>
                     <div class="flex-rectangle"></div><br><div class="flex-rectangle"></div><br</h3>
                         <p class="animated bounceInRight" style="animation-delay: 3s"><a href="slot.ejs">Slot booking</a></p>
                     </div>
+
                 </div>
-                
 
             </div>
 
             <!-- Controls -->
+            <h2>Number of slots: <span id="slotnumber"></span> </h2>
             
         </div>
 
@@ -71,5 +73,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        const slot_details = <%- JSON.stringify(slotDetails) %>;
+        console.log(slot_details);
+        console.log(slot_details.slots.length);
+        const numberofslots = slot_details.slots.length;
+        $('#slotnumber').html(numberofslots);
+    </script>
 </body>
 </html>
