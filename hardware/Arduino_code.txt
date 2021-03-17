@@ -1,0 +1,156 @@
+#include <Servo.h>
+
+Servo exserv;                          //servo as gate
+Servo enserv;
+
+int Empty;                            //available space integer
+int allSpace = 4;
+int countYes = 0;
+int carEnter = 9;                      // entry sensor 
+int carExited = 10;                   // exit sensor 
+int trigPin=2;
+int echoPin1=3;
+int echoPin2=4;
+int echoPin3=5;
+int echoPin4=6;
+int pos;
+int pos1;
+
+void setup() {
+  Serial.begin (9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin1, INPUT);
+  pinMode(echoPin2, INPUT);
+  pinMode(echoPin3, INPUT);
+  pinMode(echoPin4, INPUT);
+  exserv.attach(7);      // servo pin to 7
+  enserv.attach(8);      // servo pin to 8
+  pinMode(carExited, INPUT);    // ir as input
+  pinMode(carEnter, INPUT);     // ir as input
+}
+
+void loop() {
+
+  int carEntry = digitalRead(carEnter);      // read ir input
+  if (carEntry == HIGH) {                     // if high then count and send data
+    countYes++;                             //increment count
+    Serial.print("Car Entered = " );
+    Serial.println(countYes );
+    for (pos = 140; pos >= 45; pos -= 1) {        // change servo position
+      enserv.write(pos);                       
+      delay(5);
+    }
+    delay(2000);
+
+    for (pos = 45; pos <= 140; pos += 1) {       // change servo position
+                                             // in steps of 1 degree
+      enserv.write(pos);
+      delay(5);
+    }
+  }
+
+  int carExit = digitalRead(carExited);              //read exit ir sensor
+  if (carExit == HIGH) {                            //if high then count and send
+    countYes--;                                    //decrement count
+    Serial.print("Car Exited = " );
+    Serial.println(countYes);
+    for (pos1 = 140; pos1 >= 45; pos1 -= 1) {         // change servo position
+      exserv.write(pos1);
+      delay(5);
+    }
+    delay(2000);
+
+    for (pos1 = 45; pos1 <= 140; pos1 += 1) {            // change servo position
+      // in steps of 1 degree
+      exserv.write(pos1);
+      delay(5);
+    }
+  }
+  
+  long duration1, distance1;
+  digitalWrite(trigPin, LOW);  
+  delayMicroseconds(2); 
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10); 
+  digitalWrite(trigPin, LOW);
+  duration1 = pulseIn(echoPin1, HIGH);
+  distance1 = (duration1/2) / 29.1;
+
+   if (distance1 < 50) {                      
+        Serial.println("Slot1 Occupied ");
+  }
+
+  if (distance1 > 50) {                         
+        Serial.println("Slot1 Available ");
+  }
+  
+  long duration2, distance2;
+  digitalWrite(trigPin, LOW);  
+  delayMicroseconds(2); 
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10); 
+  digitalWrite(trigPin, LOW);
+  duration2 = pulseIn(echoPin2, HIGH);
+  distance2= (duration2/2) / 29.1;
+
+   if (distance2 < 50) {                      
+        Serial.println("Slot2 Occupied ");
+  }
+
+  if (distance2 > 50) {                         
+        Serial.println("Slot2 Available ");
+  }
+  
+  long duration3, distance3;
+  digitalWrite(trigPin, LOW);  
+  delayMicroseconds(2); 
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10); 
+  digitalWrite(trigPin, LOW);
+  duration3 = pulseIn(echoPin3, HIGH);
+  distance3= (duration3/2) / 29.1;
+
+   if (distance3 < 50) {                      
+        Serial.println("Slot3 Occupied ");
+  }
+
+  if (distance3 > 50) {                         
+        Serial.println("Slot3 Available ");
+  }
+
+  long duration4, distance4;
+  digitalWrite(trigPin, LOW);  
+  delayMicroseconds(2); 
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10); 
+  digitalWrite(trigPin, LOW);
+  duration4 = pulseIn(echoPin4, HIGH);
+  distance4= (duration4/2) / 29.1;
+
+   if (distance4 < 50) {                      
+        Serial.println("Slot4 Occupied ");
+  }
+
+  if (distance4 > 50) {                         
+        Serial.println("Slot4 Available ");
+  }
+
+  Empty = allSpace - countYes;
+  Serial.println(Empty);
+
+}
+
+void setup() {
+// Open serial communications and wait for port to open:
+Serial.begin(115200);
+while (!Serial) {
+; // wait for serial port to connect. Needed for native USB port only
+}
+}
+void loop() { // run over and over
+if (Serial.available()) {
+Serial.write(Serial.read());
+}
+}
+
+ 
